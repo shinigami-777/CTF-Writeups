@@ -1,3 +1,3 @@
-Here you’ll find detailed solutions to CTF problems.
+Here you’ll find my writeups for CTF problems I solved.
 
-## >> [Challenge 1 - Testing](testingCTF/writeup.md)
+## >> [CRHC CTF 2025](CRHC_CTF_2025/writeup.md)
